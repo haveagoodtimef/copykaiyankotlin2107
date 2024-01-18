@@ -2,11 +2,14 @@ package com.fhz.copykaiyankotlin2107.ui.home.ui.recommended
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.chad.baserecyclerviewadapterhelper.entity.HomeEntity
 import com.fhz.copykaiyankotlin2107.R
 import com.fhz.copykaiyankotlin2107.base.BaseFragment
 import com.fhz.copykaiyankotlin2107.bean.Banner
 import com.fhz.copykaiyankotlin2107.databinding.MainFragmentRecommendBinding
+import com.fhz.copykaiyankotlin2107.ui.home.ui.recommended.adapter.RecommendFragmentRecyclerViewAdapter
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
 import com.zhpan.bannerview.constants.PageStyle
@@ -27,6 +30,8 @@ class RecommendFragment : BaseFragment<MainFragmentRecommendBinding>() {
 
 
     override fun initView() {
+        //初始化recyclerview
+        initRecyclerView()
 
         //初始化banner
         binding.bannerView.setLifecycleRegistry(lifecycle)
@@ -75,6 +80,22 @@ class RecommendFragment : BaseFragment<MainFragmentRecommendBinding>() {
         list.add(Banner("美女","https://tenfei04.cfp.cn/creative/vcg/800/new/VCG211183376288.jpg",5))
         list.add(Banner("美女","https://tenfei04.cfp.cn/creative/vcg/800/new/VCG211183376288.jpg",4))
         binding.bannerView.refreshData(list)
+    }
+
+    private fun initRecyclerView() {
+
+        val list = mutableListOf<HomeEntity>()
+        list.add(HomeEntity("one","one","https://tenfei04.cfp.cn/creative/vcg/800/new/VCG211183376288.jpg",0))
+        list.add(HomeEntity("two","two","https://tenfei04.cfp.cn/creative/vcg/800/new/VCG211183376288.jpg",1))
+
+        binding.recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+//            setAdapter(RecommendFragmentRecyclerViewAdapter(viewModel.getHomeEntity()))
+            adapter = RecommendFragmentRecyclerViewAdapter(list)
+            
+        }
+
     }
 
     override fun getViewBinding(): MainFragmentRecommendBinding {
