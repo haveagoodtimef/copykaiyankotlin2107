@@ -35,26 +35,24 @@ class HomeFragment : BaseFragment<MainFragmentHomeBinding>() {
     private lateinit var magicIndicator: MagicIndicator
     override fun initView() {
         //初始化viewpager
-       initViewPager()
+        initViewPager()
         //初始化Tablayout
         initTablayout()
         //绑定viewpager
-        ViewPagerHelper.bind(magicIndicator, mViewPager);
+        ViewPagerHelper.bind(magicIndicator, mViewPager)
     }
 
     private fun initTablayout() {
         magicIndicator = binding.magicIndicator
         val commonNavigator = CommonNavigator(context)
         commonNavigator.adapter = object : CommonNavigatorAdapter() {
-            override fun getCount(): Int {
-                return mTitleDataList.size
-            }
+            override fun getCount(): Int = mTitleDataList.size
 
             override fun getTitleView(context: Context, index: Int): IPagerTitleView {
                 val colorTransitionPagerTitleView = ColorTransitionPagerTitleView(context)
                 colorTransitionPagerTitleView.normalColor = Color.GRAY
                 colorTransitionPagerTitleView.selectedColor = Color.BLACK
-                colorTransitionPagerTitleView.setText(mTitleDataList.get(index))
+                colorTransitionPagerTitleView.text = mTitleDataList[index]
                 colorTransitionPagerTitleView.setOnClickListener { mViewPager.currentItem = index }
                 return colorTransitionPagerTitleView
             }
