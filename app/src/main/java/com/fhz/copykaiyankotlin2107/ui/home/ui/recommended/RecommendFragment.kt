@@ -99,6 +99,7 @@ class RecommendFragment : BaseFragment<MainFragmentRecommendBinding>() {
     }
 
     override fun getViewBinding(): MainFragmentRecommendBinding {
+        //我是dev 分支的内容
         return MainFragmentRecommendBinding.inflate(layoutInflater)
     }
 }
