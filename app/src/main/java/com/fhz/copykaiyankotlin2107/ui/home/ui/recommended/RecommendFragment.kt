@@ -1,6 +1,6 @@
 package com.fhz.copykaiyankotlin2107.ui.home.ui.recommended
 
-import android.widget.SimpleAdapter
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.fhz.copykaiyankotlin2107.R
@@ -9,8 +9,8 @@ import com.fhz.copykaiyankotlin2107.bean.Banner
 import com.fhz.copykaiyankotlin2107.databinding.MainFragmentRecommendBinding
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
+import com.zhpan.bannerview.constants.PageStyle
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 /**
@@ -30,20 +30,35 @@ class RecommendFragment : BaseFragment<MainFragmentRecommendBinding>() {
 
         //初始化banner
         binding.bannerView.setLifecycleRegistry(lifecycle)
+            .setRoundCorner(10)
+            .setOnPageClickListener { clickedView, position ->
+                when(position){
+                    0 -> {
+                        //跳转到发现页
+                        Toast.makeText(requireContext(),"发现", Toast.LENGTH_SHORT).show()
+                    }
+                    1 -> {
+                        //跳转到推荐页
+                        Toast.makeText(requireContext(),"推荐", Toast.LENGTH_SHORT).show()
+                    }
+                    2 -> {
+                        //跳转到日报页
+                    }}
+            }
+            .setPageStyle(PageStyle.MULTI_PAGE_OVERLAP)
             .setAdapter(object : BaseBannerAdapter<Banner>() {
                 override fun bindData(
-                    holder: BaseViewHolder<Banner>?,
-                    data: Banner?,
+                    holder: BaseViewHolder<Banner>,
+                    data: Banner,
                     position: Int,
                     pageSize: Int
                 ) {
-
-//                    holder?.itemView?.context?.let {
-//                        Glide.with(it)
-//                            .load(data?.url)
-//                            .into()
-//                    }
-                    holder?.setImageResource(R.id.banner_image,R.drawable.ic_book_white_24dp)
+                    holder.itemView.let {
+                        Glide.with(it)
+                            .load(data.url)
+                            .into(holder.findViewById(R.id.banner_image))
+                    }
+//                    holder?.setImageResource(R.id.banner_image,R.drawable.ic_book_white_24dp)
 
                 }
 
