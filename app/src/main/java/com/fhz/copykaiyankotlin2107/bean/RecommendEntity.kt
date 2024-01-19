@@ -1,5 +1,7 @@
 package com.fhz.copykaiyankotlin2107.bean
 
+import androidx.room.Entity
+
 /**
  * 时间:2024/1/19
  * @author Mr.Feng

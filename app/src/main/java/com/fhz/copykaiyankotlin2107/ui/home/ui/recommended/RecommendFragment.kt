@@ -40,6 +40,13 @@ class RecommendFragment : BaseFragment<MainFragmentRecommendBinding>() {
         //初始化recyclerview
         initRecyclerView()
 
+        //点击事件
+        recommendFragmentRecyclerViewAdapter.setOnItemClickListener { adapter, _, position ->
+            //跳转到详情页
+            Toast.makeText(requireContext(), "===$position", Toast.LENGTH_SHORT).show()
+
+        }
+
         //初始化数据源
         viewModel.getRecommendData()
 

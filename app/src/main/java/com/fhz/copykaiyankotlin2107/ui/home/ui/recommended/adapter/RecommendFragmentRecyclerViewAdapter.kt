@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.chad.baserecyclerviewadapterhelper.entity.HomeEntity
 import com.chad.library.adapter4.BaseMultiItemAdapter
 import com.fhz.copykaiyankotlin2107.bean.Item
@@ -41,6 +42,9 @@ class RecommendFragmentRecyclerViewAdapter(data: List<Item>) : BaseMultiItemAdap
             override fun onBind(holder: ItemVH, position: Int, item: Item?) {
                 // 绑定 item 数据
                 holder.viewBinding.tvTitle.text = item?.data?.title
+                Glide.with(context).load(item?.data?.author?.icon).into(holder.viewBinding.ivAuthor)
+                Glide.with(context).load(item?.data?.cover?.feed).into(holder.viewBinding.ivVideoCover)
+
             }
 
 
@@ -53,6 +57,7 @@ class RecommendFragmentRecyclerViewAdapter(data: List<Item>) : BaseMultiItemAdap
 
             override fun onBind(holder: TEXT_CARDVH, position: Int, item: Item?) {
                 // 绑定 item 数据
+                holder.viewBinding.tvTitle.text = item?.data?.title
 
             }
 
