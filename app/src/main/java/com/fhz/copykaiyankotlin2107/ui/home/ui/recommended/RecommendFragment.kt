@@ -33,6 +33,9 @@ class RecommendFragment : BaseFragment<MainFragmentRecommendBinding>() {
         //初始化recyclerview
         initRecyclerView()
 
+        //初始化数据源
+        viewModel.getRecommendData()
+
         //初始化banner
         binding.bannerView.setLifecycleRegistry(lifecycle)
             .setRoundCorner(10)
